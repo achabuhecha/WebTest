@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QQ音乐</title>
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/flexieble.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            height: 100%;
+            /* background: blue; */
+        }
+        
+        header nav.topNav {
+            width: 10rem;
+            height: 1.2rem;
+            position: relative;
+            background: #24ce65;
+            text-align: center;
+        }
+
+        header nav.topNav .divOfALink {
+            display: inline-block;
+            height: 1.2rem;
+            width: 6rem;
+            font-size: 0.5rem;
+        }
+
+        header nav.topNav .divOfALink a {
+            display: inline-block;
+            text-decoration: none;
+            height: 1.2rem;
+            color: rgb(203, 203, 203);
+            line-height: 1.2rem;
+            margin: 0 0.2rem;
+        }
+
+        header nav.topNav .divOfALink a.active {
+            color: white;
+        }
+
+        header nav.topNav span {
+            height: 1.2rem;
+        }
+
+        header nav.topNav span img {
+            height: 0.8rem;
+        }
+
+        header nav.topNav .leftNavIcon {
+            position: absolute;
+            top: 0.2rem;
+            left: 0.2rem;
+        }
+
+        header nav.topNav .rightNavIcon {
+            position: absolute;
+            top: 0.2rem;
+            right: 0.2rem;
+        }
+
+        div.bodyer {
+            /* background: red; */
+        }
+        
+        footer{
+            width: 10rem;
+            height: 1.5rem;
+            position: fixed;
+            bottom: 0;
+            background: rgb(255, 255, 255);
+            border: 1px solid #24ce65;
+        }
+        footer .thisSongImg_div{
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            float: left;
+            border-radius: 0.75rem;
+        }
+        footer .thisSongImg{
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 0.6rem;
+            margin: 0.15rem;
+        }
+        footer .songControlSpan{
+            display: inline-block;
+            width: 6rem;
+            height: 1rem;
+            position: relative;
+            top: 0.35rem;
+            text-align: center;
+            left: 0.5rem;
+        }
+        footer .songControlSpan img{
+            width: .8rem;
+            height: .8rem;
+            margin:0 0.15rem;
+        }
+        footer .songlistSpan{
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            float: right;
+        }
+
+        footer .songlistSpan .songlistImg{
+            width: .8rem;
+            height: .8rem;
+            margin: 0.35rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <nav class="topNav">
+            <span class="leftNavIcon" onclick="toggleLeftNav()">
+                <img id="toggleLeftNav" src="../../image/leftNav.png" alt="">
+            </span>
+            <div class="divOfALink">
+                <a href="#" data-src="myMusic.html">我的</a>
+                <a href="#" data-src="MusicHall.html" class="active">音乐馆</a>
+                <a href="#" data-src="myFind.html">发现</a>
+            </div>
+            <span class="rightNavIcon" href="#">
+                <img src="../../image/addIcon.png" alt="">
+            </span>
+        </nav>
+    </header>
+    <div class="bodyer">
+        <!-- 此处嵌入页面文件 -->
+    </div>
+    <!-- <iframe id="songListIframe" src="MusicHall.html" name="songListIframe" frameborder="0" width="100%"></iframe> -->
+    <footer>
+        <div class="thisSongImg_div">
+            <img class="thisSongImg" src="../image/logo.jpg" alt="aa">        
+        </div>
+        <span class="songControlSpan">
+            <img class="preSong" onclick='changeIframe("preSong")' src="../image/preSong.png" alt="">
+            <img class="songStatus" onclick='changeIframe("songStatus")' src="../image/startSong.png" alt="">
+            <img class="nextSong" onclick='changeIframe("nextSong")' src="../image/nextSong.png" alt="">
+        </span>
+        <span class="songlistSpan">
+            <img class="songlistImg" src="../image/songList.png" alt="">
+        </span>
+    </footer>
+    <script>
+        $("nav a").click(function () {
+            $(this).addClass("active");
+            $(this).siblings().removeClass("active");
+        });
+        var isOpen = true;
+        function toggleLeftNav() {
+            if (isOpen) {
+                document.getElementById("leftNav").style.left = 0;
+                isOpen = false;
+            } else {
+                document.getElementById("leftNav").style.left = "-7rem";
+                isOpen = true;
+            }
+        }
+
+        $(".bodyer").load("musicList.html");
+        $(".bodyer").css("height", window.innerHeight - $("header").height());
+        $("header nav.topNav .divOfALink a").click(function () {
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+            $(".bodyer").empty();
+            $(".bodyer").load($(this).attr("data-src"));
+        })
+    </script>
+</body>
+
+</html>

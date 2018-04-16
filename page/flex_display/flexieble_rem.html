@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/flexieble.js"></script>
+    <script src="https://y.gtimg.cn/music/h5/client/jsbridge.js?max_age=2592000"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-size: .186667rem /* 14/75 */
+        }
+        #ul1 img{
+            width: 9rem;
+            /* height: 2rem; */
+            margin:0 .5rem;
+        }
+        h1{
+            font-family: serif,"宋体";
+            font-size: .6rem;
+            margin:0.5rem auto;
+            width: 4rem;
+            text-align: center;
+            color: teal;
+        }
+        p{
+            font-size: 0.3rem;
+            margin-left: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="ul1">
+            <h1>QQ音乐</h1>
+            <img src="../../image/hf.jpg">
+        </div>
+    </header>
+    <footer>
+
+    </footer>
+    <script>
+        var jQuery = jQuery.noConflict(); 
+        let url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=27&_=1519963122923';
+        jQuery.ajax({
+          url:url,
+          type:"get",
+          dataType:'jsonp',
+          jsonp: "jsonpCallback",
+          scriptCharset: 'GBK',//解决中文乱码
+          success: function(data){
+            //最新音乐数据
+            console.log(data)
+          },
+          error:function (e) {
+            console.log('error');
+          }
+        });
+    </script>
+</body>
+</html>
